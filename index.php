@@ -1,11 +1,5 @@
 <?php
 
-$array = [
-    [1,0,1],
-    [0,1,0],
-    [0,0,1]
-];
-
 interface MatrixDrawerInterface {
     public function draw();
 }
@@ -26,6 +20,16 @@ class MatrixDrawer implements MatrixDrawerInterface
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function generateMatrix(int $n) {
+        for ($i=0; $i<$n; $i++) {
+            for ($j=0; $j<$n; $j++) {
+                $this->matrix[$i][$j] = array_rand($this->drawingRule);
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -68,6 +72,19 @@ class MatrixDrawer implements MatrixDrawerInterface
     }
 }
 
+// Q1: draw matrix
+$array = [
+    [1,0,1],
+    [0,1,0],
+    [0,0,1]
+];
 $matrix = new MatrixDrawer();
 $matrix->setMatrix($array);
+$matrix->draw();
+
+echo PHP_EOL;
+
+// Q2: Draw random matrix
+$matrix2 = new MatrixDrawer();
+$matrix->generateMatrix(5);
 $matrix->draw();
